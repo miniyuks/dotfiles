@@ -17,6 +17,7 @@ if has("autocmd")
   " これらのftではインデントを無効に
   "autocmd FileType php filetype indent off
 
+  " sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
   autocmd FileType apache     setlocal sw=4 sts=4 ts=4 et
   autocmd FileType aspvbs     setlocal sw=4 sts=4 ts=4 et
   autocmd FileType c          setlocal sw=4 sts=4 ts=4 et
@@ -47,3 +48,12 @@ if has("autocmd")
   autocmd FileType go         setlocal noexpandtab list tabstop=2 shiftwidth=2
 endif
 
+" Space+otでtabstop=4 or 8の切り替え
+function! s:toggle_tabstop()
+  if &tabstop == 4
+    setlocal tabstop=8
+  else
+    setlocal tabstop=4
+  endif
+endfunction
+nnoremap <silent> <Space>ot :<C-u>call <SID>toggle_tabstop()<CR>
